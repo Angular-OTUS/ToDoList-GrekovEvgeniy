@@ -1,0 +1,34 @@
+<div class="to-do-list-container">
+    <div class="to-do-list-content">
+        <div class="content-card">
+            <header>
+                <h1>Список задач</h1>
+            </header>
+            <main>
+                <ul class="no-bullets tasks-list">
+                    @for (task of tasks; track task) {
+                    <li class="task-field">
+                        <p> {{ task }} </p>
+                        <button>
+                            Удалить
+                        </button>
+                    </li>
+                    } @empty {
+                    <li class="task-field">Список пуст</li>
+                    }
+                </ul>
+                <div class="add-task-form">
+                    <input placeholder="Новая задача">
+                    <button>
+                        Добавить задачу 
+                    </button>
+                </div>
+            </main>
+        </div>
+
+        <footer class="footer">
+            <p>Обучение с Otus</p>
+            <p>Автор домашнего задания Евгений Греков, г.Рыбинск</p>
+        </footer>
+    </div>
+</div>

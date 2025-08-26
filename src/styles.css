@@ -1,0 +1,13 @@
+:root {
+  --border-radius-button: 3px;
+  --border-radius-card: 6px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+input:focus {
+  outline: none;
+}

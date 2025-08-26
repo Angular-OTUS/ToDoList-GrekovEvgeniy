@@ -1,0 +1,84 @@
+.to-do-list-container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.to-do-list-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: stretch;
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+    max-width: 960px;
+    margin: 1rem 1rem 1rem 1rem;
+}
+
+h1 {
+    padding-left: 2rem;
+}
+
+.content-card {
+    flex-grow: 1;
+    padding: 0.5rem;
+    background-color: #eee4cc;
+    border-radius: var(--border-radius-card)
+}
+
+.footer {
+    text-align: center;
+}
+
+.task-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    margin: 0.5rem 0 0.5rem 0;
+    background-color: gainsboro;
+    border-radius: var(--border-radius-card)
+}
+
+.no-bullets {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.tasks-list {
+    margin: 0 1rem 0 1rem
+}
+
+.task-field>p {
+    margin: 0;
+    padding: 1rem;
+}
+
+.task-field>button {
+    min-width: 8rem;
+    margin: 0 1rem 0 1rem;
+    border: solid 1px gray;
+    border-radius: var(--border-radius-button)
+}
+
+.add-task-form {
+    margin: 2rem 1rem 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.add-task-form>input {
+    flex-grow: 1;
+    padding-left: 1rem;
+    height: 3rem;
+        border: solid 1px gray;
+    border-radius: var(--border-radius-button)
+}
+
+.add-task-form>button {
+    min-width: 8rem;
+    margin: 0 1rem 0 1rem;
+    background-color: rgb(211, 153, 240);
+    border: none;
+    border-radius: var(--border-radius-button)
+}
