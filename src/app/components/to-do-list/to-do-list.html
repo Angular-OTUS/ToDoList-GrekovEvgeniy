@@ -6,9 +6,9 @@
             </header>
             <main>
                 <ul class="no-bullets tasks-list">
-                    @for (task of tasks; track task) {
+                    @for (task of tasks; track task.id) {
                     <li class="task-field">
-                        <p> {{ task }} </p>
+                        <p> {{ task.todoTitle }} </p>
                         <button>
                             Удалить
                         </button>
@@ -27,7 +27,7 @@
         </div>
 
         <footer class="footer">
-            <p>Обучение с Otus</p>
+            <p>Обучение c Otus</p>
             <p>Автор домашнего задания Евгений Греков, г.Рыбинск</p>
         </footer>
     </div>

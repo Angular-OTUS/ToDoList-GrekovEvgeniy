@@ -1,9 +1,15 @@
 import { Component } from '@angular/core';
 
-const tasks: string[] = [
-    "Написать мотивационный пост", 
-    "Выполнить ДЗ#1",
-    "Послушать онлайн-урок",
+
+interface Task {
+  id: number,
+  todoTitle: string
+}
+
+const tasks: Task[] = [
+    {id: 0, todoTitle: "Написать мотивационный пост"},
+    {id: 1, todoTitle: "Выполнить ДЗ#1"},
+    {id: 2, todoTitle: "Послушать онлайн-урок"}
   ]
 
 @Component({
@@ -13,5 +19,5 @@ const tasks: string[] = [
   styleUrl: './to-do-list.css'
 })
 export class ToDoList {
-  protected readonly tasks: string[] = tasks
+  protected readonly tasks: Task[] = tasks
 }
