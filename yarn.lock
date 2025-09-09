@@ -167,6 +167,13 @@
     ora "8.2.0"
     rxjs "7.8.2"
 
+"@angular/animations@^20.2.4":
+  version "20.2.4"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-20.2.4.tgz#575efa1d7935c7ffe24be60853a8c8ad04a66e55"
+  integrity sha512-mXiTlXZgAF4uYonOt7l2w7uvLLTJEk6jqs3H291bYuoDRM8R166UjN7ygAeBmPiJ4TLMyKGkwMQy3b1Vvw4RQA==
+  dependencies:
+    tslib "^2.3.0"
+
 "@angular/build@^20.1.5":
   version "20.2.0"
   resolved "https://registry.yarnpkg.com/@angular/build/-/build-20.2.0.tgz#8b285a6a4f2625dd073067e9a259b707e5dd5596"
@@ -200,6 +207,14 @@
     watchpack "2.4.4"
   optionalDependencies:
     lmdb "3.4.2"
+
+"@angular/cdk@^20.2.2":
+  version "20.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-20.2.2.tgz#9015cb37f466982fea5f0077ab57b6ab620f3638"
+  integrity sha512-jLvIMmFI8zoi6vAu1Aszua59GmhqBOtsVfkwLUGg5Hi86DI/inJr9BznNX2EKDtaulYMGZCmDgsltXQXeqP5Lg==
+  dependencies:
+    parse5 "^8.0.0"
+    tslib "^2.3.0"
 
 "@angular/cli@^20.1.5":
   version "20.2.0"
@@ -264,6 +279,13 @@
   version "20.2.1"
   resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-20.2.1.tgz#629402fd89c1bebc704673b4ededb357c8d359e6"
   integrity sha512-SfkiHEIFPLtTKeaXUTpRfYnpJDxaeKiTi0YqfvzEjKE68qH0t+pQ4rL0Poch2/l4snP6JS1XzO/nDve1dk3vZw==
+  dependencies:
+    tslib "^2.3.0"
+
+"@angular/material@^20.2.2":
+  version "20.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-20.2.2.tgz#3efcbed12745ca7386042d538f77874fb72d2654"
+  integrity sha512-ovLk6h6XIw3qtSjp2bSqFn7ANYvWOIh2zTrRPdAB78siOpqs11d8YdyD4LUEuUrcZoInNgK7AMJsfldDkHwhnA==
   dependencies:
     tslib "^2.3.0"
 

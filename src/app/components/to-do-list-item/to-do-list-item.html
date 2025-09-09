@@ -1,0 +1,6 @@
+<div class="task-field">
+    <p> {{ task.todoTitle }} </p>
+    <button class="button button-delete" (click)="doDeleteTask.emit(task.id)">
+        Удалить
+    </button>
+</div>

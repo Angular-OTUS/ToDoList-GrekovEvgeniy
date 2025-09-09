@@ -7,20 +7,23 @@
             <main>
                 <ul class="no-bullets tasks-list">
                     @for (task of tasks; track task.id) {
-                    <li class="task-field">
-                        <p> {{ task.todoTitle }} </p>
-                        <button>
-                            Удалить
-                        </button>
+                    <li>
+                        <app-to-do-list-item [task]="task" (doDeleteTask)="doDeleteTask($event)"></app-to-do-list-item>
                     </li>
                     } @empty {
-                    <li class="task-field">Список пуст</li>
+                    <li class="task-field">
+                        <p>Список пуст</p>
+                    </li>
                     }
                 </ul>
                 <div class="add-task-form">
-                    <input placeholder="Новая задача">
-                    <button>
-                        Добавить задачу 
+                    <mat-form-field style="width: 100%">
+                        <input matInput placeholder="Новая задача" type="text" 
+                        [(ngModel)]="newTaskText" maxlength="75">
+                    </mat-form-field>
+                    <button class="button button-add" [disabled]="isDisabledAddButton()"
+                        [ngClass]="{disabled: isDisabledAddButton()}" (click)="doAddNewTask()">
+                        Добавить задачу
                     </button>
                 </div>
             </main>
