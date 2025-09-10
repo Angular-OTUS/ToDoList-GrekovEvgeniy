@@ -1,27 +1,25 @@
-<div class="to-do-list-container">
-    <div class="to-do-list-content">
-        <div class="content-card">
+<div class="to--do--list--container">
+    <div class="to--do--list--content">
+        <div class="content--card">
             <header>
                 <h1>Список задач</h1>
             </header>
             <main>
-                <ul class="no-bullets tasks-list">
+                <ul class="no--bullets tasks--list">
                     @for (task of tasks; track task.id) {
-                    <li>
                         <app-to-do-list-item [task]="task" (doDeleteTask)="doDeleteTask($event)"></app-to-do-list-item>
-                    </li>
                     } @empty {
-                    <li class="task-field">
+                    <li class="task--field">
                         <p>Список пуст</p>
                     </li>
                     }
                 </ul>
-                <div class="add-task-form">
+                <div class="add--task--form">
                     <mat-form-field style="width: 100%">
                         <input matInput placeholder="Новая задача" type="text" 
                         [(ngModel)]="newTaskText" maxlength="75">
                     </mat-form-field>
-                    <button class="button button-add" [disabled]="isDisabledAddButton()"
+                    <button class="button button--add" [disabled]="isDisabledAddButton()"
                         [ngClass]="{disabled: isDisabledAddButton()}" (click)="doAddNewTask()">
                         Добавить задачу
                     </button>

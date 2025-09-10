@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ToDoListItem } from "../to-do-list-item/to-do-list-item";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { I } from '@angular/cdk/keycodes';
 
 export class Task {
   constructor(  
@@ -35,11 +36,7 @@ export class ToDoList {
   }
 
   protected doDeleteTask(id: number): void {
-    this.tasks.forEach((task, index) => {
-      if(task.id === id) {
-        this.tasks.splice(index, 1)
-      }
-    })
+    this.tasks = this.tasks.filter(task => task.id !== id)
   }
 
 protected doAddNewTask(): void {

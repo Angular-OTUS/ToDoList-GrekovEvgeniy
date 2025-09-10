@@ -1,4 +1,4 @@
-.task-field {
+.task--field {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
@@ -7,7 +7,7 @@
     border-radius: var(--border-radius-card)
 }
 
-.button-delete {
+.button--delete {
     background-color: red;
 }
 
