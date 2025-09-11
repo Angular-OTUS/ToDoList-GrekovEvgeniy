@@ -1,0 +1,6 @@
+<li class="task--field">
+    <p> {{ task.todoTitle }} </p>
+
+    <app-button [typeInput]="'delete'" [disabledInput]="false" 
+    [tittleInput]="'Удалить'" (clickOutput)="doDeleteTask.emit(task.id)"></app-button>
+</li>

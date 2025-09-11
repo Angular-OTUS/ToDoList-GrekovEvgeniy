@@ -1,33 +1,33 @@
-<div class="to-do-list-container">
-    <div class="to-do-list-content">
-        <div class="content-card">
+<div class="to--do--list--container">
+    <div class="to--do--list--content">
+        <div class="content--card">
             <header>
                 <h1>Список задач</h1>
             </header>
             <main>
-                <ul class="no-bullets tasks-list">
-                    @for (task of tasks; track task) {
-                    <li class="task-field">
-                        <p> {{ task }} </p>
-                        <button>
-                            Удалить
-                        </button>
-                    </li>
+                @if(isLoading()) {
+                <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+                } @else {
+                <ul class="no--bullets tasks--list">
+                    @for (task of tasks; track task.id) {
+                    <app-to-do-list-item [task]="task" (doDeleteTask)="doDeleteTask($event)"></app-to-do-list-item>
                     } @empty {
-                    <li class="task-field">Список пуст</li>
+                    <li class="task--field">
+                        <p>Список пуст</p>
+                    </li>
                     }
                 </ul>
-                <div class="add-task-form">
-                    <input placeholder="Новая задача">
-                    <button>
-                        Добавить задачу 
-                    </button>
+                <div class="add--task--form">
+                    <mat-form-field style="width: 100%">
+                        <input matInput placeholder="Новая задача" type="text" [(ngModel)]="newTaskText" maxlength="75">
+                    </mat-form-field>
+                    <app-button [tittleInput]="'Добавить задачу'" [typeInput]="'add'" [disabledInput]="isDisabledAddButton()" (click)="doAddNewTask()"></app-button>
                 </div>
+                }
             </main>
         </div>
-
         <footer class="footer">
-            <p>Обучение с Otus</p>
+            <p>Обучение c Otus</p>
             <p>Автор домашнего задания Евгений Греков, г.Рыбинск</p>
         </footer>
     </div>

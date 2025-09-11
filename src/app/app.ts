@@ -5,7 +5,7 @@ import { ToDoList } from "./components/to-do-list/to-do-list";
   selector: 'app-root',
   imports: [ToDoList],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('otus-homework');

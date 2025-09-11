@@ -1,0 +1,20 @@
+button {
+    height: 100%;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-button);
+    min-width: 8rem;
+    margin: 0 1rem 0 1rem;
+}
+
+.add {
+    background-color: green;
+}
+
+.delete {
+    background-color: red;
+}
+
+.disabled {
+    opacity: 0.5;
+}
