@@ -1,0 +1,8 @@
+<button  [disabled]="disabledInput" (click)="clickOutput.emit()" 
+[ngClass]="{
+    'add': typeInput === 'add',
+    'delete': typeInput === 'delete',
+    'disabled': disabledInput,
+}">
+    {{ tittleInput }}
+</button>
