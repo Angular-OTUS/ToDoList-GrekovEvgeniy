@@ -8,9 +8,14 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './button.css',
 })
 export class Button {
-  @Input() public tittleInput: string = '';
-  @Input() public typeInput: string = '';
-  @Input() public disabledInput: boolean = false;
+  @Input({required: true}) public propTittle!: string;
+  @Input({required: true}) public propType!: string;
+  @Input({required: false}) public propDisabled?: boolean = false;
 
-  @Output() protected readonly clickOutput: EventEmitter<void> = new EventEmitter<void>
+  @Output() public readonly propOnClick: EventEmitter<void> = new EventEmitter<void>
+
+  protected onClick(event: MouseEvent): void {
+    this.propOnClick.emit()
+    event.stopPropagation()
+  }
 }

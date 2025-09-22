@@ -1,4 +1,4 @@
-<div class="to--do--list--container">
+<div class="to--do--list--container" (click)="onClickRoot()">
     <div class="to--do--list--content">
         <div class="content--card">
             <header>
@@ -8,20 +8,31 @@
                 @if(isLoading()) {
                 <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
                 } @else {
-                <ul class="no--bullets tasks--list">
-                    @for (task of tasks; track task.id) {
-                    <app-to-do-list-item [task]="task" (doDeleteTask)="doDeleteTask($event)"></app-to-do-list-item>
-                    } @empty {
-                    <li class="task--field">
-                        <p>Список пуст</p>
-                    </li>
+                <div class="d--flex">
+                    <ul class="no--bullets tasks--list">
+                        @for (task of tasks; track task.id) {
+                        <app-to-do-list-item [propTask]="task" [propSelected]="isSelected(task.id)" (propOnDelete)="doDeleteTask($event)"
+                            (click)="setSelectedId(task.id, $event)"></app-to-do-list-item>
+                        } @empty {
+                        <li class="task--field">
+                            <p>Список пуст</p>
+                        </li>
+                        }
+                    </ul>
+                    @if(selectedItemId != null) {
+                    <span class="desc">{{ getSelectedTaskDeskription() }}</span>
                     }
-                </ul>
+                </div>
                 <div class="add--task--form">
-                    <mat-form-field style="width: 100%">
-                        <input matInput placeholder="Новая задача" type="text" [(ngModel)]="newTaskText" maxlength="75">
-                    </mat-form-field>
-                    <app-button [tittleInput]="'Добавить задачу'" [typeInput]="'add'" [disabledInput]="isDisabledAddButton()" (click)="doAddNewTask()"></app-button>
+                    <div class="w--100">
+                        <mat-form-field appTooltip="Новая задача" class="w--100">
+                            <input matInput placeholder="Заголовок" type="text" [(ngModel)]="newTaskTittle"
+                                maxlength="75">
+                        </mat-form-field>
+                        <textarea appTooltip="Описание" [(ngModel)]="newTaskDescription" placeholder="Описание" class="textArea"></textarea>
+                    </div>
+                    <app-button appTooltip="Добавление по-клику" style="height: 4rem;" [propTittle]="'Добавить задачу'" [propType]="'add'"
+                        [propDisabled]="isDisabledAddButton()" (propOnClick)="doAddNewTask()"></app-button>
                 </div>
                 }
             </main>

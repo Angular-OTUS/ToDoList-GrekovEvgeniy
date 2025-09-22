@@ -1,15 +1,22 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Task } from '../to-do-list/to-do-list';
 import { Button } from "../button/button";
+import { Task } from '../../interfaces/interfacse';
+import { Tooltip } from '../../directives/tooltip';
+
 
 @Component({
   selector: 'app-to-do-list-item',
-  imports: [Button],
+  imports: [Button, Tooltip],
   templateUrl: './to-do-list-item.html',
   styleUrl: './to-do-list-item.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToDoListItem {
-  @Input({required: true}) public task!: Task
-  @Output() protected readonly doDeleteTask: EventEmitter<number> = new EventEmitter<number>
+  @Input({required: true}) public propTask!: Task
+  @Input({required: true}) public propSelected!: boolean
+  @Output() protected readonly propOnDelete: EventEmitter<number> = new EventEmitter<number>
+
+  protected onDeleteTask(): void {
+    this.propOnDelete.emit(this.propTask.id)
+  }
 }

@@ -1,3 +1,7 @@
 p {
     padding: 0 1rem 0 1rem;
 }
+
+.selected {
+    background-color: darkgrey;
+}
