@@ -1,6 +1,5 @@
-<li class="task--field">
-    <p> {{ task.todoTitle }} </p>
-
-    <app-button [typeInput]="'delete'" [disabledInput]="false" 
-    [tittleInput]="'Удалить'" (clickOutput)="doDeleteTask.emit(task.id)"></app-button>
+<li class="task--field" [class]="{'selected': propSelected}">
+    <p appTooltip="Описание по-клику" class="w-100"> {{ propTask.todoTitle }} </p>
+    <app-button appTooltip="Удаление по-клику" [propType]="'delete'" [propDisabled]="false" 
+    [propTittle]="'Удалить'" (propOnClick)="onDeleteTask()"></app-button>
 </li>

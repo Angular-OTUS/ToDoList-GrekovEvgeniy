@@ -36,10 +36,12 @@ h1 {
 }
 
 .tasks--list {
+    width: 100%;
     margin: 0 1rem 0 1rem
 }
 
 :host ::ng-deep .task--field {
+    min-width: 30rem;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
@@ -58,4 +60,26 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
+}
+
+.w--100 {
+    width: 100%;
+}
+
+.d--flex {
+    display: flex;
+}
+
+.desc {
+    background-color: white;
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 2rem 0.5rem 1rem;
+    border-radius: var(--border-radius-card)
+}
+
+.textArea {
+    height: 5rem;
+    width: calc(100% - 6px);
+    overflow-wrap: break-word;
 }

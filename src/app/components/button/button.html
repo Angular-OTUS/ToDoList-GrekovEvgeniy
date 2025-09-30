@@ -1,8 +1,8 @@
-<button  [disabled]="disabledInput" (click)="clickOutput.emit()" 
+<button  [disabled]="propDisabled" (click)="onClick($event)"
 [ngClass]="{
-    'add': typeInput === 'add',
-    'delete': typeInput === 'delete',
-    'disabled': disabledInput,
+    'add': propType === 'add',
+    'delete': propType === 'delete',
+    'disabled': propDisabled,
 }">
-    {{ tittleInput }}
+    {{ propTittle }}
 </button>

@@ -1,0 +1,18 @@
+.body {
+    position: fixed;
+    background-color: beige;
+    max-width: 10rem;
+    border-radius: 10px;
+	padding: 3px 10px 3px 10px;
+	transform: translate(30px, -32px);
+}
+
+.triangle-down {
+	position: fixed;
+	width: 0;
+	height: 0;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 8px solid beige;
+	transform: translate(48px, -8px);
+}

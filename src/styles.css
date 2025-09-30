@@ -13,3 +13,7 @@ html, body {
 input:focus {
   outline: none;
 }
+
+.w-100 {
+  width: 100%;
+}
