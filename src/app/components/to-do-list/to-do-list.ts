@@ -44,9 +44,12 @@ export class ToDoList implements OnInit {
     this.tasks = this.tasks.filter(task => task.id !== id)
   }
 
+  private getIdNextAfterMax(): number {
+    return Math.max(0, ...this.tasks.map(task => task.id)) + 1
+  }
+
   protected doAddNewTask(): void {
-    let idMax = Math.max(0, ...this.tasks.map(task => task.id))
-    this.tasks.push(new Task(++idMax, this.newTaskTittle, this.newTaskDescription))
+    this.tasks.push(new Task(this.getIdNextAfterMax(), this.newTaskTittle, this.newTaskDescription))
   }
 
   protected setSelectedId(id: number, event: MouseEvent): void {
@@ -60,7 +63,7 @@ export class ToDoList implements OnInit {
   }
 
   protected isSelected(id: number): boolean {
-    return this,this.selectedItemId === id
+    return this.selectedItemId === id
   }
 
   protected onClickRoot(): void {
