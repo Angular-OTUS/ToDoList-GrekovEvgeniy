@@ -1,5 +1,6 @@
 .body {
     position: fixed;
+	overflow: hidden;
     background-color: beige;
     max-width: 10rem;
     border-radius: 10px;
