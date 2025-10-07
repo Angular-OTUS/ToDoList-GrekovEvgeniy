@@ -15,6 +15,10 @@ button {
     background-color: red;
 }
 
+.save {
+    background-color: blue;
+}
+
 .disabled {
     opacity: 0.5;
 }

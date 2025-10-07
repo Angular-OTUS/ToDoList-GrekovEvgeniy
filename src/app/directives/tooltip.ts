@@ -1,11 +1,11 @@
-import { ComponentRef, Directive, ElementRef, HostListener, Input, Renderer2, signal, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, Renderer2, signal, ViewContainerRef } from '@angular/core';
 import { TooltipComponent } from '../components/tooltip-component/tooltip-component';
 import { T } from '@angular/cdk/keycodes';
 
 @Directive({
   selector: '[appTooltip]',
 })
-export class Tooltip {
+export class Tooltip implements OnDestroy {
   private componentRef!: ComponentRef<TooltipComponent>
   @Input({required: true}) appTooltip!: string
 
@@ -15,7 +15,6 @@ export class Tooltip {
   ) {}
 
   @HostListener('mouseenter') show() {
-    console.log("Tooltip")
     this.createTooltip()
   }
 
@@ -35,6 +34,7 @@ export class Tooltip {
 
   private createTooltip(): void {
     this.componentRef = this.viewContainerRef.createComponent(TooltipComponent)
+    document.body.appendChild(this.componentRef.location.nativeElement);
     this.componentRef.instance.propText = this.appTooltip
     this.setTooltipPosition()
   }
@@ -49,6 +49,10 @@ export class Tooltip {
     if(this.componentRef) {
       this.componentRef.destroy()
     }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy()
   }
 
 }
