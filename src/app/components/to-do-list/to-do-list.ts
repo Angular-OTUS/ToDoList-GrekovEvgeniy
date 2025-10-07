@@ -70,7 +70,7 @@ export class ToDoList implements OnInit {
   }
 
   private isDisabledAddButton(): boolean {
-    return this.newTaskTittle()?.trim().length === 0
+    return !this.newTaskTittle()?.trim()
   }
 
   private getSelectedTaskDeskription(): string {
