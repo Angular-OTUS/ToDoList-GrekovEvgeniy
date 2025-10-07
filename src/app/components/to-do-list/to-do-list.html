@@ -11,9 +11,11 @@
                 <div class="d--flex">
                     <ul class="no--bullets tasks--list">
                         @for (task of tasks(); track task.id) {
-                        <app-to-do-list-item [propTask]="task" [propSelected]="isSelected(task.id)"
-                            (propOnDelete)="doDeleteTask(task.id)" (propOnSave)="doSaveTask(task.id, $event)"
-                            (click)="setSelectedId(task.id)"></app-to-do-list-item>
+                        <app-to-do-list-item [propTask]="task" [propSelectedId]="selectedTaskId()"
+                            [propEditedId]="editedTaskId()" (propOnDelete)="doDeleteTask(task.id)"
+                            (propOnSave)="doSaveTask(task.id, $event)" (click)="setSelectedId(task.id)"
+                            (dblclick)="setEditedId(task.id)">
+                        </app-to-do-list-item>
                         } @empty {
                         <li class="task--field">
                             <p>Список пуст</p>

@@ -21,6 +21,7 @@ export class ToDoList implements OnInit {
   protected readonly tasks: Signal<Task[]>
 
   protected readonly selectedTaskId: WritableSignal<number | null> = signal(null)
+  protected readonly editedTaskId: WritableSignal<number | null> = signal(null)
   protected readonly newTaskTittle: ModelSignal<string> = model("")
   protected readonly isLoading: WritableSignal<boolean> = signal(true)
   protected readonly selectedTaskDescription: Signal<string>
@@ -56,6 +57,7 @@ export class ToDoList implements OnInit {
 
   protected doSaveTask(id: number, tittle: string): void {
     this.store.doSaveTask(id, tittle)
+    this.editedTaskId.set(null)
     this.toastService.show(`Заголовок задачи "${tittle}" изменен`)
   }
 
@@ -63,8 +65,8 @@ export class ToDoList implements OnInit {
     this.selectedTaskId.set(this.selectedTaskId() === id ? null : id)
   }
 
-  protected isSelected(id: number): boolean {
-    return this.selectedTaskId() === id
+  protected setEditedId(id: number): void {
+    this.editedTaskId.set(this.editedTaskId() === id ? null : id)
   }
 
   private isDisabledAddButton(): boolean {
