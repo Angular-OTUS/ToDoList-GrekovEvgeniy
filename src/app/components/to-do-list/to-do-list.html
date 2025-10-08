@@ -6,14 +6,24 @@
             </header>
             <main>
                 @if(isLoading()) {
-                <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-                } @else {
+                <app-loading-spinner></app-loading-spinner>
+                }
+                @else {
+                <mat-form-field class="form--select">
+                    <mat-label>Фильтр по статусу</mat-label>
+                    <mat-select [(value)]="selectedFilterOption">
+                        @for (option of filterOptions; track option.value) {
+                        <mat-option [value]="option.value">{{option.alias}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
                 <div class="d--flex">
                     <ul class="no--bullets tasks--list">
-                        @for (task of tasks(); track task.id) {
+                        @for (task of filteredTasks(); track task.id) {
                         <app-to-do-list-item [propTask]="task" [propSelectedId]="selectedTaskId()"
                             [propEditedId]="editedTaskId()" (propOnDelete)="doDeleteTask(task.id)"
-                            (propOnSave)="doSaveTask(task.id, $event)" (click)="setSelectedId(task.id)"
+                            (propOnSave)="doSaveTask(task.id, $event)"
+                            (propOnToggleStatus)="doToggleTaskStatus(task.id, $event)" (click)="setSelectedId(task.id)"
                             (dblclick)="setEditedId(task.id)">
                         </app-to-do-list-item>
                         } @empty {
@@ -22,27 +32,9 @@
                         </li>
                         }
                     </ul>
-                    @if (tasks().length > 0) {
-                    @if(selectedTaskId() != null) {
                     <span class="desc">{{ selectedTaskDescription() }}</span>
-                    } @else {
-                    <span class="desc">Выделите задачу, и здесь появится подробное её описание</span>
-                    }
-                    }
                 </div>
-                <div class="add--task--form">
-                    <div class="w--100">
-                        <mat-form-field appTooltip="Новая задача" class="w--100">
-                            <input matInput placeholder="Заголовок" type="text" [(ngModel)]="newTaskTittle"
-                                maxlength="50">
-                        </mat-form-field>
-                        <textarea appTooltip="Описание" [(ngModel)]="newTaskDescription" placeholder="Описание"
-                            class="textArea"></textarea>
-                    </div>
-                    <app-button appTooltip="Добавление по-клику" style="height: 4rem;" [propTittle]="'Добавить задачу'"
-                        [propType]="'add'" [propDisabled]="disabledAddButton()"
-                        (propOnClick)="doAddNewTask()"></app-button>
-                </div>
+                <app-todo-create-item (propCreate)="doAddNewTask($event)"></app-todo-create-item>
                 }
             </main>
         </div>
