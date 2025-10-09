@@ -1,9 +1,6 @@
-export interface TaskForCreate {
+export interface Task {
     tittle: string,
     description: string,
-}
-
-export interface Task extends TaskForCreate {
     id: number,
     status: TaskStatus,
 }

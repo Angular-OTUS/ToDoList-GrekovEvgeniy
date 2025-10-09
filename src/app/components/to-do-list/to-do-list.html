@@ -22,8 +22,8 @@
                         @for (task of filteredTasks(); track task.id) {
                         <app-to-do-list-item [propTask]="task" [propSelectedId]="selectedTaskId()"
                             [propEditedId]="editedTaskId()" (propOnDelete)="doDeleteTask(task.id)"
-                            (propOnSave)="doSaveTask(task.id, $event)"
-                            (propOnToggleStatus)="doToggleTaskStatus(task.id, $event)" (click)="setSelectedId(task.id)"
+                            (propOnSave)="doChangeTaskTittle(task.id, $event)"
+                            (propOnToggleStatus)="doChangeTaskStatus(task.id, $event)" (click)="setSelectedId(task.id)"
                             (dblclick)="setEditedId(task.id)">
                         </app-to-do-list-item>
                         } @empty {

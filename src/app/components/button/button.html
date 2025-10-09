@@ -1,4 +1,4 @@
-<button  [disabled]="propDisabled" (click)="onClick($event)"
+<button  [disabled]="propDisabled" (click)="onClick($event)" (dblclick)="$event.stopPropagation()"
 [ngClass]="{
     'add': propType === 'add',
     'delete': propType === 'delete',

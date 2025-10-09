@@ -3,7 +3,7 @@ import { Button } from "../button/button";
 import { Task, TaskStatus } from '../../interfaces/interfaces';
 import { Tooltip } from '../../directives/tooltip';
 import { FormsModule } from "@angular/forms";
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-to-do-list-item',

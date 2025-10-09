@@ -1,11 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed, model, ModelSignal, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, model, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToDoListItem } from "../to-do-list-item/to-do-list-item";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { Task, TaskFilterDescription, TaskForCreate, TaskStatus } from '../../interfaces/interfaces';
+import { Task, TaskFilterDescription, TaskStatus } from '../../interfaces/interfaces';
 import { ToDoListStore } from '../../services/to-do-list-store';
-import { ToastService } from '../../services/toast-service';
 import { LoadingSpinner } from "../loading-spinner/loading-spinner";
 import { MatSelectModule } from '@angular/material/select';
 import { TodoCreateItem } from "../todo-create-item/todo-create-item";
@@ -30,7 +29,6 @@ export class ToDoList implements OnInit {
   
   constructor(
     private readonly store: ToDoListStore,
-    private readonly toastService: ToastService,
   ) {
     this.filteredTasks = computed<Task[]>(() => store.getTasks().filter(
       (task) => this.selectedFilterOption() === "All" || task.status === this.selectedFilterOption()))
@@ -38,31 +36,26 @@ export class ToDoList implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(() => this.isLoading.set(false), 500)
+    setTimeout(() => {
+      this.store.LoadTasks()
+      this.isLoading.set(false)
+    }, 500)
   }
 
   protected doDeleteTask(id: number): void {
-    const tittle = this.filteredTasks().find(v => v.id === id)?.tittle
-    if (this.selectedTaskId() === id) {
-      this.selectedTaskId.set(null)
-    }
     this.store.doDeleteTask(id)
-    this.toastService.show(`Задача "${tittle}" удалена`)
   }
 
-  protected doAddNewTask(task: TaskForCreate): void {
+  protected doAddNewTask(task: Partial<Task>): void {
     this.store.doAddNewTask(task)
-    this.toastService.show(`Задача "${task.tittle}" добавлена`)
   }
 
-  protected doSaveTask(id: number, tittle: string): void {
-    this.store.doSaveTask(id, tittle)
-    this.editedTaskId.set(null)
-    this.toastService.show(`Заголовок задачи "${tittle}" изменен`)
+  protected doChangeTaskTittle(id: number, tittle: string): void {
+    this.store.doChangeTaskTittle(id, tittle, () => this.editedTaskId.set(null))
   }
 
-  protected doToggleTaskStatus(id: number, status: TaskStatus): void {
-    this.store.doToggleTaskStatus(id, status)
+  protected doChangeTaskStatus(id: number, status: TaskStatus): void {
+    this.store.doChangeTaskStatus(id, status)
   }
 
   protected setSelectedId(id: number): void {
@@ -74,12 +67,8 @@ export class ToDoList implements OnInit {
   }
 
   private getSelectedTaskDeskription(): string {
-    if(this.selectedTaskId() === null) {
-      return "Выделите задачу, и здесь появится подробное её описание" 
-    } else {
-      const selectedTask = this.filteredTasks().find((task) => task.id === this.selectedTaskId())
-      return selectedTask?.description || ""
-    }
+    const selectedTask = this.filteredTasks().find((task) => task.id === this.selectedTaskId())
+    return selectedTask ? selectedTask.description : "Выделите задачу, и здесь появится подробное её описание" 
   }
 
 }
