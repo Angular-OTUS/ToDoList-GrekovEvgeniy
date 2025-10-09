@@ -1,14 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
   imports: [CommonModule],
   templateUrl: './button.html',
   styleUrl: './button.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Button {
-  @Input({required: true}) public propTittle!: string;
   @Input({required: true}) public propType!: string;
   @Input({required: false}) public propDisabled?: boolean = false;
 

@@ -1,0 +1,12 @@
+<form class="add--task--form">
+    <div class="w--100">
+        <mat-form-field appTooltip="Новая задача" class="w--100">
+            <input matInput placeholder="Заголовок" type="text" [(ngModel)]="tittle" name="tittle"
+                maxlength="50">
+        </mat-form-field>
+        <textarea appTooltip="Описание" [(ngModel)]="description" name="description"
+            placeholder="Описание" class="textArea"></textarea>
+    </div>
+    <app-button appTooltip="Добавление по-клику" style="height: 4rem;" [propType]="'add'"
+        [propDisabled]="disabledAddButton()" (propOnClick)="onAdd()">Добавить задачу</app-button>
+</form>
