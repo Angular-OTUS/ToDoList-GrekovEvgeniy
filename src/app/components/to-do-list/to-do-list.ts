@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, model, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, linkedSignal, model, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToDoListItem } from "../to-do-list-item/to-do-list-item";
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,7 +18,7 @@ import { TodoCreateItem } from "../todo-create-item/todo-create-item";
 })
 export class ToDoList implements OnInit {
   protected readonly selectedTaskId: WritableSignal<number | null> = signal(null)
-  protected readonly editedTaskId: WritableSignal<number | null> = signal(null)
+  protected readonly editedTaskId: WritableSignal<number | null> = linkedSignal(() => this.store.isEdited())
   protected readonly isLoading: WritableSignal<boolean> = signal(true)
 
   protected readonly filteredTasks: Signal<Task[]>
@@ -51,7 +51,7 @@ export class ToDoList implements OnInit {
   }
 
   protected doChangeTaskTittle(id: number, tittle: string): void {
-    this.store.doChangeTaskTittle(id, tittle, () => this.editedTaskId.set(null))
+    this.store.doChangeTaskTittle(id, tittle)
   }
 
   protected doChangeTaskStatus(id: number, status: TaskStatus): void {

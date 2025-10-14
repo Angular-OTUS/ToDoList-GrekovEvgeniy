@@ -24,6 +24,8 @@ export class TodoCreateItem {
 
   protected onAdd(): void {
     this.propCreate.emit({tittle: this.tittle(), description: this.description()})
+    this.tittle.set("")
+    this.description.set("")
   }
 
 }
