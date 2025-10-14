@@ -13,3 +13,8 @@
 .tittle--input {
     border-radius: var(--border-radius-card);
 }
+
+.my--auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
