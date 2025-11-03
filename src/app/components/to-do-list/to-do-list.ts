@@ -8,31 +8,31 @@ import { ToDoListStore } from '../../services/to-do-list-store';
 import { LoadingSpinner } from "../loading-spinner/loading-spinner";
 import { MatSelectModule } from '@angular/material/select';
 import { TodoCreateItem } from "../todo-create-item/todo-create-item";
+import { RouterOutlet, RouterLinkWithHref, ActivatedRoute, Router, RouterModule, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-to-do-list',
-  imports: [FormsModule, ToDoListItem, MatFormFieldModule, MatInputModule, LoadingSpinner, MatSelectModule, TodoCreateItem],
+  imports: [
+    FormsModule, MatFormFieldModule, MatInputModule, LoadingSpinner, MatSelectModule,
+    TodoCreateItem, ToDoListItem,
+    RouterModule
+],
   templateUrl: './to-do-list.html',
   styleUrl: './to-do-list.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToDoList implements OnInit {
-  protected readonly selectedTaskId: WritableSignal<number | null> = signal(null)
   protected readonly editedTaskId: WritableSignal<number | null> = linkedSignal(() => this.store.isEdited())
   protected readonly isLoading: WritableSignal<boolean> = signal(true)
-
   protected readonly filteredTasks: Signal<Task[]>
-  protected readonly selectedTaskDescription: Signal<string>
-
   protected readonly filterOptions = filterOptions
-  protected readonly selectedFilterOption = model(filterOptions[0].value)
+  protected readonly checkedFilterOption = model(filterOptions[0].value)
   
   constructor(
     private readonly store: ToDoListStore,
   ) {
     this.filteredTasks = computed<Task[]>(() => store.getTasks().filter(
-      (task) => this.selectedFilterOption() === "All" || task.status === this.selectedFilterOption()))
-    this.selectedTaskDescription = computed<string>(() => this.getSelectedTaskDeskription())
+      (task) => this.checkedFilterOption() === "All" || task.status === this.checkedFilterOption()))
   }
 
   ngOnInit(): void {
@@ -58,18 +58,18 @@ export class ToDoList implements OnInit {
     this.store.doChangeTaskStatus(id, status)
   }
 
-  protected setSelectedId(id: number): void {
-    this.selectedTaskId.set(this.selectedTaskId() === id ? null : id)
-  }
+  // protected setSelectedId(id: number): void {
+  //   this.selectedTaskId.set(this.selectedTaskId() === id ? null : id)
+  // }
 
   protected setEditedId(id: number): void {
     this.editedTaskId.set(this.editedTaskId() === id ? null : id)
   }
 
-  private getSelectedTaskDeskription(): string {
-    const selectedTask = this.filteredTasks().find((task) => task.id === this.selectedTaskId())
-    return selectedTask ? selectedTask.description : "Выделите задачу, и здесь появится подробное её описание" 
-  }
+  // private getSelectedTaskDeskription(): string {
+  //   const selectedTask = this.filteredTasks().find((task) => task.id === this.selectedTaskId())
+  //   return selectedTask ? selectedTask.description : "Выделите задачу, и здесь появится подробное её описание" 
+  // }
 
 }
 

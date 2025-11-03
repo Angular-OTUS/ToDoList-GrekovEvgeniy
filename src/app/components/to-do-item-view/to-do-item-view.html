@@ -1,0 +1,8 @@
+<div class="task-description">
+    @if (task()) {
+        <span>{{task()?.description}}</span>
+    } @else {
+        <span>Задача с индексом {{taskId()}} не найдена</span>
+    }
+</div>
+

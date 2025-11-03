@@ -60,14 +60,6 @@ h1 {
     display: flex;
 }
 
-.desc {
-    background-color: white;
-    width: 100%;
-    padding: 1rem;
-    margin: 0.5rem 2rem 0.5rem 1rem;
-    border-radius: var(--border-radius-card)
-}
-
-.form--select {
+.form--filter {
     margin-left: 1rem
 }

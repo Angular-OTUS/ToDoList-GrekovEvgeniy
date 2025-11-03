@@ -1,4 +1,4 @@
-<li class="task--field" [class]="{'selected': isSelected()}">
+<li class="task--field" routerLinkActive="active" [routerLink]="['/tasks', propTask().id]">
     <mat-checkbox appTooltip="Изменение статуса" class="my--auto pl--1" [checked]="isComletedTaskStatus()"
         (click)="toggleStatus($event)" (dblclick)="$event.stopPropagation()"/>
     @if(isEdited()) {

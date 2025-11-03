@@ -2,16 +2,15 @@
     <div class="to--do--list--content">
         <div class="content--card">
             <header>
-                <h1>Список задач</h1>
+                <h1 [routerLink]="'/tasks'">Список задач</h1>
             </header>
             <main>
                 @if(isLoading()) {
                 <app-loading-spinner></app-loading-spinner>
-                }
-                @else {
-                <mat-form-field class="form--select">
+                } @else {
+                <mat-form-field class="form--filter">
                     <mat-label>Фильтр по статусу</mat-label>
-                    <mat-select [(value)]="selectedFilterOption">
+                    <mat-select [(value)]="checkedFilterOption">
                         @for (option of filterOptions; track option.value) {
                         <mat-option [value]="option.value">{{option.alias}}</mat-option>
                         }
@@ -20,10 +19,9 @@
                 <div class="d--flex">
                     <ul class="no--bullets tasks--list">
                         @for (task of filteredTasks(); track task.id) {
-                        <app-to-do-list-item [propTask]="task" [propSelectedId]="selectedTaskId()"
-                            [propEditedId]="editedTaskId()" (propOnDelete)="doDeleteTask(task.id)"
-                            (propOnSave)="doChangeTaskTittle(task.id, $event)"
-                            (propOnToggleStatus)="doChangeTaskStatus(task.id, $event)" (click)="setSelectedId(task.id)"
+                        <app-to-do-list-item [propTask]="task" [propEditedId]="editedTaskId()"
+                            (propOnDelete)="doDeleteTask(task.id)" (propOnSave)="doChangeTaskTittle(task.id, $event)"
+                            (propOnToggleStatus)="doChangeTaskStatus(task.id, $event)"
                             (dblclick)="setEditedId(task.id)">
                         </app-to-do-list-item>
                         } @empty {
@@ -32,7 +30,7 @@
                         </li>
                         }
                     </ul>
-                    <span class="desc">{{ selectedTaskDescription() }}</span>
+                    <router-outlet></router-outlet>
                 </div>
                 <app-todo-create-item (propCreate)="doAddNewTask($event)"></app-todo-create-item>
                 }
