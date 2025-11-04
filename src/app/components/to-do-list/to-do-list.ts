@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, linkedSignal, model, OnInit, Signal, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, linkedSignal, model, OnInit, Signal, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ToDoListItem } from "../to-do-list-item/to-do-list-item";
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -22,22 +22,22 @@ import { RouterOutlet, RouterLinkWithHref, ActivatedRoute, Router, RouterModule,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToDoList implements OnInit {
+  private readonly store = inject( ToDoListStore)
+
   protected readonly editedTaskId: WritableSignal<number | null> = linkedSignal(() => this.store.isEdited())
   protected readonly isLoading: WritableSignal<boolean> = signal(true)
   protected readonly filteredTasks: Signal<Task[]>
   protected readonly filterOptions = filterOptions
   protected readonly checkedFilterOption = model(filterOptions[0].value)
   
-  constructor(
-    private readonly store: ToDoListStore,
-  ) {
-    this.filteredTasks = computed<Task[]>(() => store.getTasks().filter(
+  constructor() {
+    this.filteredTasks = computed<Task[]>(() => this.store.getTasks().filter(
       (task) => this.checkedFilterOption() === "All" || task.status === this.checkedFilterOption()))
   }
 
   ngOnInit(): void {
     setTimeout(() => {
-      this.store.LoadTasks()
+      this.store.loadTasks()
       this.isLoading.set(false)
     }, 500)
   }
@@ -50,26 +50,17 @@ export class ToDoList implements OnInit {
     this.store.doAddNewTask(task)
   }
 
-  protected doChangeTaskTittle(id: number, tittle: string): void {
-    this.store.doChangeTaskTittle(id, tittle)
+  protected doChangeTaskTitle(id: number, title: string): void {
+    this.store.doChangeTaskTitle(id, title)
   }
 
   protected doChangeTaskStatus(id: number, status: TaskStatus): void {
     this.store.doChangeTaskStatus(id, status)
   }
 
-  // protected setSelectedId(id: number): void {
-  //   this.selectedTaskId.set(this.selectedTaskId() === id ? null : id)
-  // }
-
   protected setEditedId(id: number): void {
     this.editedTaskId.set(this.editedTaskId() === id ? null : id)
   }
-
-  // private getSelectedTaskDeskription(): string {
-  //   const selectedTask = this.filteredTasks().find((task) => task.id === this.selectedTaskId())
-  //   return selectedTask ? selectedTask.description : "Выделите задачу, и здесь появится подробное её описание" 
-  // }
 
 }
 

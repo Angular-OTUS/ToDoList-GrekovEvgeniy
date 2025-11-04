@@ -2,12 +2,12 @@
     <mat-checkbox appTooltip="Изменение статуса" class="my--auto pl--1" [checked]="isComletedTaskStatus()"
         (click)="toggleStatus($event)" (dblclick)="$event.stopPropagation()"/>
     @if(isEdited()) {
-    <input class="w--100 pl--1 tittle--input" placeholder="Заголовок" type="text" [(ngModel)]="tittle" maxlength="50" (click)="$event.stopPropagation()">
+    <input class="w--100 pl--1 title--input" placeholder="Заголовок" type="text" [(ngModel)]="title" maxlength="50" (click)="$event.stopPropagation()">
     <app-button appTooltip="Сохранение по-клику" [propType]="'save'" [propDisabled]="false"
         (propOnClick)="onSaveTask()">Сохранить</app-button>
     }
     @else {
-    <p appTooltip="Описание по-клику" class="w--100 p--0101"> {{ propTask().tittle }}</p>
+    <p appTooltip="Описание по-клику" class="w--100 p--0101"> {{ propTask().title }}</p>
     <app-button appTooltip="Удаление по-клику" [propType]="'delete'" [propDisabled]="false"
         (propOnClick)="onDeleteTask()">Удалить</app-button>
     }

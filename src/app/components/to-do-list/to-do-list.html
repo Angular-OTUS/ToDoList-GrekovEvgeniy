@@ -20,7 +20,7 @@
                     <ul class="no--bullets tasks--list">
                         @for (task of filteredTasks(); track task.id) {
                         <app-to-do-list-item [propTask]="task" [propEditedId]="editedTaskId()"
-                            (propOnDelete)="doDeleteTask(task.id)" (propOnSave)="doChangeTaskTittle(task.id, $event)"
+                            (propOnDelete)="doDeleteTask(task.id)" (propOnSave)="doChangeTaskTitle(task.id, $event)"
                             (propOnToggleStatus)="doChangeTaskStatus(task.id, $event)"
                             (dblclick)="setEditedId(task.id)">
                         </app-to-do-list-item>

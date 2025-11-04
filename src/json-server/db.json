@@ -2,25 +2,25 @@
   "tasks": [
     {
       "id": 0,
-      "tittle": "Написать мотивационный пост",
+      "title": "Написать мотивационный пост",
       "description": "Автор: Греков \n Дата 20.08.2025",
       "status": "Completed"
     },
     {
       "id": 1,
-      "tittle": "Выполнить ДЗ#6",
+      "title": "Выполнить ДЗ#6",
       "description": "Автор: OTUS \n Дата 21.08.2025",
-      "status": "InProgress"
-    },
-    {
-      "id": 2,
-      "tittle": "Послушать онлайн-урок",
-      "description": "Автор: OTUS \n Дата 22.08.2025",
       "status": "Completed"
     },
     {
-      "tittle": "l8y9l",
-      "description": ";;;;;;;;;;;;;;;;jjjoiu;uoi; ld ,l kkl mkld mndfk mn,dkm nkjmnkjbnm kjmnkj   fdskj n mkdfj mnkjb nmkfjsd mnkj mnkjfmkdfjf mk mkl mk k klfgmbfgm vkl mf  kmjdfb ngdn",
+      "id": 2,
+      "title": "Выполнить ДЗ#7",
+      "description": "Автор: OTUS \n Дата 20.10.2025",
+      "status": "InProgress"
+    },
+    {
+      "title": "gstrb",
+      "description": "nnnnnn",
       "id": 3,
       "status": "InProgress"
     }

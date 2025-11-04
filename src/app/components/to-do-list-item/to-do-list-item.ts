@@ -20,7 +20,7 @@ export class ToDoListItem {
   protected readonly propOnDelete = output<void>()
   protected readonly propOnSave = output<string>()
   protected readonly propOnToggleStatus = output<TaskStatus>()
-  protected readonly tittle = linkedSignal(() =>  this.isEdited() ? this.propTask().tittle : "")
+  protected readonly title = linkedSignal(() =>  this.isEdited() ? this.propTask().title : "")
   protected isEdited = computed<boolean>(() => this.propEditedId() === this.propTask().id)
   protected isComletedTaskStatus = computed<boolean>(() => this.propTask().status === TaskStatus.COMPLETED)
 
@@ -32,7 +32,7 @@ export class ToDoListItem {
   }
 
   protected onSaveTask(): void {
-    this.propOnSave.emit(this.tittle())
+    this.propOnSave.emit(this.title())
   }
 
   protected toggleStatus($event: MouseEvent): void {

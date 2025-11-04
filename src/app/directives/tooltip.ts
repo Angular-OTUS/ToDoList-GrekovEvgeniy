@@ -1,17 +1,14 @@
-import { ComponentRef, Directive, ElementRef, HostListener, Input, OnDestroy, ViewContainerRef } from '@angular/core';
+import { ComponentRef, Directive, ElementRef, HostListener, inject, input, Input, OnDestroy, ViewContainerRef } from '@angular/core';
 import { TooltipComponent } from '../components/tooltip-component/tooltip-component';
 
 @Directive({
   selector: '[appTooltip]',
 })
 export class Tooltip implements OnDestroy {
+  private elementRef = inject(ElementRef)
+  private viewContainerRef = inject(ViewContainerRef)
   private componentRef!: ComponentRef<TooltipComponent>
-  @Input({required: true}) appTooltip!: string
-
-  constructor(
-    private elementRef: ElementRef,
-    private viewContainerRef: ViewContainerRef
-  ) {}
+  public readonly appTooltip = input.required<string>()
 
   @HostListener('mouseenter') show() {
     this.createTooltip()
@@ -34,14 +31,14 @@ export class Tooltip implements OnDestroy {
   private createTooltip(): void {
     this.componentRef = this.viewContainerRef.createComponent(TooltipComponent)
     document.body.appendChild(this.componentRef.location.nativeElement);
-    this.componentRef.instance.propText = this.appTooltip
+    this.componentRef.setInput('propText', this.appTooltip())
     this.setTooltipPosition()
   }
 
   private setTooltipPosition(): void {
     const pos = this.elementRef.nativeElement.getBoundingClientRect()
-    this.componentRef.instance.propOffsetX = pos.left;
-    this.componentRef.instance.propOffsetY = pos.top;
+    this.componentRef.setInput('propOffsetX', pos.left);
+    this.componentRef.setInput('propOffsetY', pos.top);
   }
 
   private destroy(): void {

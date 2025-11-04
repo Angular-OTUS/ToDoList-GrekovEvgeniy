@@ -1,30 +1,25 @@
-import { inject, Injectable, OnDestroy, signal, Signal, WritableSignal } from '@angular/core';
+import { DestroyRef, inject, Injectable, signal, Signal, WritableSignal } from '@angular/core';
 import { Task, TaskStatus } from '../interfaces/interfaces';
 import { ProtocolService } from './protocol-service';
 import { ToastService } from './toast-service';
 import { Subject, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ToDoListStore implements OnDestroy {
+export class ToDoListStore {
   private readonly protocol = inject(ProtocolService)
   private readonly toast = inject(ToastService)
-
-  private destroy$ = new Subject<void>();
+  private destroyRef = inject(DestroyRef);
 
   private readonly tasks: WritableSignal<Task[]> = signal([])
   public readonly getTasks: Signal<Task[]> = this.tasks.asReadonly()
   public readonly isEdited: WritableSignal<number | null> = signal(null, { equal: () => false })
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
-  public LoadTasks(): void {
+  public loadTasks(): void {
     this.protocol.getTasks()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (value) => {
           this.toast.show("Список задач обновлен")
@@ -39,14 +34,14 @@ export class ToDoListStore implements OnDestroy {
   public doDeleteTask(id: number): void {
     const task = this.getTasks().find(v => v.id === id)
     this.protocol.deleteTask(id)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
-          this.toast.show(`Задача "${task?.tittle}" удалена`)
-          this.LoadTasks()
+          this.toast.show(`Задача "${task?.title}" удалена`)
+          this.loadTasks()
         },
         error: () => {
-          this.toast.show(`Ошибка удаления задачи "${task?.tittle}"`)
+          this.toast.show(`Ошибка удаления задачи "${task?.title}"`)
         }
       })
   }
@@ -54,29 +49,29 @@ export class ToDoListStore implements OnDestroy {
   public doAddNewTask(task: Partial<Task>): void {
     const taskOverall = { ...task, id: this.getIdNextAfterMax(), status: TaskStatus.IN_PROGRESS } as Task
     this.protocol.addTask(taskOverall)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
-          this.toast.show(`Задача "${taskOverall.tittle}" добавлена`)
-          this.LoadTasks()
+          this.toast.show(`Задача "${taskOverall.title}" добавлена`)
+          this.loadTasks()
         },
         error: () => {
-          this.toast.show(`Ошибка добавления задачи "${taskOverall.tittle}"`)
+          this.toast.show(`Ошибка добавления задачи "${taskOverall.title}"`)
         }
       })
   }
 
-  public doChangeTaskTittle(id: number, tittle: string): void {
-    this.protocol.updateTask(id, { tittle })
-      .pipe(takeUntil(this.destroy$))
+  public doChangeTaskTitle(id: number, title: string): void {
+    this.protocol.updateTask(id, { title: title })
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
           this.isEdited.set(null)
-          this.toast.show(`Изменен заголовок задачи "${tittle}"`)
-          this.LoadTasks()
+          this.toast.show(`Изменен заголовок задачи "${title}"`)
+          this.loadTasks()
         },
         error: () => {
-          this.toast.show(`Ошибка изменения заголовка задачи "${tittle}"`)
+          this.toast.show(`Ошибка изменения заголовка задачи "${title}"`)
         }
       })
   }
@@ -84,14 +79,14 @@ export class ToDoListStore implements OnDestroy {
   public doChangeTaskStatus(id: number, status: TaskStatus): void {
     const task = this.getTasks().find(v => v.id === id)
     this.protocol.updateTask(id, { status })
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: () => {
-          this.toast.show(`Изменен статус задачи "${task?.tittle}"`)
-          this.LoadTasks()
+          this.toast.show(`Изменен статус задачи "${task?.title}"`)
+          this.loadTasks()
         },
         error: () => {
-          this.toast.show(`Ошибка изменения статуса задачи "${task?.tittle}"`)
+          this.toast.show(`Ошибка изменения статуса задачи "${task?.title}"`)
         }
       })
   }

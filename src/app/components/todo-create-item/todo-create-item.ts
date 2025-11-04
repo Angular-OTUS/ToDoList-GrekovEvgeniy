@@ -11,21 +11,20 @@ import { Task } from '../../interfaces/interfaces';
   styleUrl: './todo-create-item.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodoCreateItem {
 
-  protected readonly tittle = model("")
+export class TodoCreateItem {
+  protected readonly title = model("")
   protected readonly description = model("")
   protected readonly disabledAddButton = computed<boolean>(() => this.isDisabledAddButton())
   protected readonly propCreate = output<Partial<Task>>()
   
   private isDisabledAddButton(): boolean {
-    return !this.tittle()?.trim()
+    return !this.title()?.trim()
   }
 
   protected onAdd(): void {
-    this.propCreate.emit({tittle: this.tittle(), description: this.description()})
-    this.tittle.set("")
+    this.propCreate.emit({title: this.title(), description: this.description()})
+    this.title.set("")
     this.description.set("")
   }
-
 }
