@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -9,10 +9,10 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Button {
-  @Input({required: true}) public propType!: string;
-  @Input({required: false}) public propDisabled?: boolean = false;
+  public readonly propType =input.required<string>()
+  public readonly propDisabled = input<boolean>(false)
 
-  @Output() public readonly propOnClick: EventEmitter<void> = new EventEmitter<void>
+  protected readonly propOnClick = output<void>()
 
   protected onClick(event: MouseEvent): void {
     this.propOnClick.emit()

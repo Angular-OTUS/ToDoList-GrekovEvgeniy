@@ -1,13 +1,13 @@
-import { Component, signal } from '@angular/core';
-import { ToDoList } from "./components/to-do-list/to-do-list";
+import { Component } from '@angular/core';
 import { ToastComponent } from "./components/toast-component/toast-component";
+import { RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [ToDoList, ToastComponent],
+  imports: [ToastComponent, RouterOutlet ],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
-  protected readonly title = signal('otus-homework');
+
 }

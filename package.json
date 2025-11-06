@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "start json-server": "json-server --watch ./src/json-server/db.json"
+    "json-server": "json-server --watch ./src/json-server/db.json"
   },
   "prettier": {
     "overrides": [

@@ -2,7 +2,7 @@
     padding: 0 1rem 0 1rem;
 }
 
-.selected {
+.active {
     background-color: darkgrey;
 }
 
@@ -10,7 +10,7 @@
     padding-left: 1rem;
 }
 
-.tittle--input {
+.title--input {
     border-radius: var(--border-radius-card);
 }
 
