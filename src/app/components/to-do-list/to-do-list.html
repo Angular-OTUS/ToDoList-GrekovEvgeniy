@@ -2,13 +2,13 @@
     <div class="to--do--list--content">
         <div class="content--card">
             <header>
-                <h1 [routerLink]="'/tasks'">Список задач</h1>
+                <h1 appTooltip="Перейти к общему списку задач" [routerLink]="'/tasks'">Список задач</h1>
             </header>
             <main>
                 @if(isLoading()) {
                 <app-loading-spinner></app-loading-spinner>
                 } @else {
-                <mat-form-field class="form--filter">
+                <mat-form-field appTooltip="Выберите статус" class="form--filter">
                     <mat-label>Фильтр по статусу</mat-label>
                     <mat-select [(value)]="checkedFilterOption">
                         @for (option of filterOptions; track option.value) {

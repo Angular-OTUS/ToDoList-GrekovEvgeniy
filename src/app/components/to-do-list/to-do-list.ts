@@ -9,11 +9,13 @@ import { LoadingSpinner } from "../loading-spinner/loading-spinner";
 import { MatSelectModule } from '@angular/material/select';
 import { TodoCreateItem } from "../todo-create-item/todo-create-item";
 import { RouterOutlet, RouterLinkWithHref, ActivatedRoute, Router, RouterModule, RouterLinkActive } from '@angular/router';
+import { Tooltip } from '../../directives/tooltip';
 
 @Component({
   selector: 'app-to-do-list',
   imports: [
     FormsModule, MatFormFieldModule, MatInputModule, LoadingSpinner, MatSelectModule,
+    Tooltip,
     TodoCreateItem, ToDoListItem,
     RouterModule
 ],

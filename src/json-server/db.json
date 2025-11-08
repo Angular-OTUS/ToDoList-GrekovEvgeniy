@@ -10,18 +10,30 @@
       "id": 1,
       "title": "Выполнить ДЗ#6",
       "description": "Автор: OTUS \n Дата 21.08.2025",
-      "status": "Completed"
+      "status": "InProgress"
     },
     {
       "id": 2,
       "title": "Выполнить ДЗ#7",
       "description": "Автор: OTUS \n Дата 20.10.2025",
-      "status": "InProgress"
+      "status": "Completed"
     },
     {
       "title": "gstrb",
       "description": "nnnnnn",
       "id": 3,
+      "status": "InProgress"
+    },
+    {
+      "title": "рапр",
+      "description": "",
+      "id": 4,
+      "status": "InProgress"
+    },
+    {
+      "title": "xbnxfgn",
+      "description": "",
+      "id": 5,
       "status": "InProgress"
     }
   ]
