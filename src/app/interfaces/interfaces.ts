@@ -11,13 +11,14 @@ export interface Toast {
 }
 
 export enum TaskStatus {
-    IN_PROGRESS = "InProgress",
-    COMPLETED = "Completed",
+    SCHEDULED = "scheduled",
+    IN_PROGRESS = "inProgress",
+    COMPLETED = "completed",
 }
 
-export type TaskFilterOption = TaskStatus | "All"
-
-export interface TaskFilterDescription {
-    value: TaskFilterOption,
-    alias: string
+export interface Description {
+    value: string,
+    alias: string,
 }
+
+export type SortedTasksByStatus = Record<TaskStatus, Task[]>

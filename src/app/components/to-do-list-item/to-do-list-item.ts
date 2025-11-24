@@ -16,29 +16,37 @@ import { Router, RouterModule } from '@angular/router';
 export class ToDoListItem {
   public readonly propTask = input.required<Task>()
   public readonly propEditedId = input.required<number | null>()
+  public TaskStatus = TaskStatus
 
   protected readonly propOnDelete = output<void>()
   protected readonly propOnSave = output<string>()
-  protected readonly propOnToggleStatus = output<TaskStatus>()
+  protected readonly propOnChangeStatus = output<TaskStatus>()
   protected readonly title = linkedSignal(() =>  this.isEdited() ? this.propTask().title : "")
   protected isEdited = computed<boolean>(() => this.propEditedId() === this.propTask().id)
-  protected isComletedTaskStatus = computed<boolean>(() => this.propTask().status === TaskStatus.COMPLETED)
+  protected checkboxIsChecked = computed(() => this.propTask().status === TaskStatus.COMPLETED);
+  protected checkboxIsIndeterminate = computed(() => this.propTask().status === TaskStatus.IN_PROGRESS);
 
   private router = inject(Router)
+  private readonly checkboxOrder: TaskStatus[] = Object.values(TaskStatus);
+  private readonly checkboxOrderLength: number = this.checkboxOrder.length;
 
   protected onDeleteTask(): void {
+    this.router.navigate(['/backlog'])
     this.propOnDelete.emit()
-    this.router.navigate(['/tasks'])
   }
 
   protected onSaveTask(): void {
     this.propOnSave.emit(this.title())
   }
 
-  protected toggleStatus($event: MouseEvent): void {
-    $event.stopPropagation()
-    const isCompleted = this.propTask().status === TaskStatus.COMPLETED
-    this.propOnToggleStatus.emit(isCompleted ? TaskStatus.IN_PROGRESS : TaskStatus.COMPLETED)
+  protected toggleState(): void {
+    const nextStatus = this.getNextState(this.propTask().status);
+    this.propOnChangeStatus.emit(nextStatus);
+  }
+
+  private getNextState(status: TaskStatus): TaskStatus {
+    const currentIndex = this.checkboxOrder.indexOf(status);
+    return this.checkboxOrder[(currentIndex + 1) % this.checkboxOrderLength];
   }
 
 }

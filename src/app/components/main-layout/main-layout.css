@@ -1,0 +1,32 @@
+.to--do--list--container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+}
+
+.to--do--list--content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-items: stretch;
+    width: calc(100% - 2rem);
+    height: calc(100% - 2rem);
+    max-width: 960px;
+    margin: 1rem 1rem 1rem 1rem;
+}
+
+.content--card {
+    flex-grow: 1;
+    padding: 0.5rem;
+    background-color: #eee4cc;
+    border-radius: var(--border-radius-card)
+}
+
+.footer {
+    text-align: center;
+}
+
+.mat-mdc-tab-nav-bar {
+
+    margin: 0 1rem 1rem 1rem;
+}

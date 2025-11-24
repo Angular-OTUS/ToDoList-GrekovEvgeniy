@@ -1,40 +1,52 @@
 {
   "tasks": [
     {
-      "id": 0,
-      "title": "Написать мотивационный пост",
-      "description": "Автор: Греков \n Дата 20.08.2025",
-      "status": "Completed"
+      "title": "Написать компонент Board",
+      "description": "Три колонки: В ожидании, В работе, Выполненные",
+      "id": 8,
+      "status": "completed"
     },
     {
-      "id": 1,
-      "title": "Выполнить ДЗ#6",
-      "description": "Автор: OTUS \n Дата 21.08.2025",
-      "status": "InProgress"
+      "title": "Получить таски из стор",
+      "description": "Создать поле типа сигнал, присвоить ему геттер тасков из стора.",
+      "id": 9,
+      "status": "completed"
     },
     {
-      "id": 2,
-      "title": "Выполнить ДЗ#7",
-      "description": "Автор: OTUS \n Дата 20.10.2025",
-      "status": "Completed"
+      "title": "Сходить в баню",
+      "description": "с 18:00 до 21:00",
+      "id": 10,
+      "status": "completed"
     },
     {
-      "title": "gstrb",
-      "description": "nnnnnn",
-      "id": 3,
-      "status": "InProgress"
+      "title": "Позагарать",
+      "description": "Это будет классно!!!",
+      "id": 12,
+      "status": "scheduled"
     },
     {
-      "title": "рапр",
-      "description": "",
-      "id": 4,
-      "status": "InProgress"
+      "title": "Взять задачу у начальника",
+      "description": "Спросить, что делать дальше по работе",
+      "id": 13,
+      "status": "scheduled"
     },
     {
-      "title": "xbnxfgn",
-      "description": "",
-      "id": 5,
-      "status": "InProgress"
+      "title": "Выложить ДЗ№8 на проверку",
+      "description": "Пуш и все тут!",
+      "id": 14,
+      "status": "inProgress"
+    },
+    {
+      "title": "Уточнить насчет ДЗ№9",
+      "description": "Предлагают технологию BehaviorSubject, но у меня на сигналах все сделано, это современнее.",
+      "id": 15,
+      "status": "inProgress"
+    },
+    {
+      "title": "Послушать лекции по RxJs",
+      "description": "там всего две части - 1 и 2",
+      "id": 16,
+      "status": "scheduled"
     }
   ]
 }

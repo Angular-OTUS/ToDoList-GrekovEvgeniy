@@ -1,0 +1,16 @@
+.columns {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem;
+    justify-content: space-around;
+}
+
+.column {
+    flex: 1;
+}
+
+.task {
+    padding: 1rem;
+    background-color: gainsboro;
+    border-radius: var(--border-radius-card)
+}

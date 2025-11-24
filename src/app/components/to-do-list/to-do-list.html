@@ -1,44 +1,16 @@
-<div class="to--do--list--container">
-    <div class="to--do--list--content">
-        <div class="content--card">
-            <header>
-                <h1 appTooltip="Перейти к общему списку задач" [routerLink]="'/tasks'">Список задач</h1>
-            </header>
-            <main>
-                @if(isLoading()) {
-                <app-loading-spinner></app-loading-spinner>
-                } @else {
-                <mat-form-field appTooltip="Выберите статус" class="form--filter">
-                    <mat-label>Фильтр по статусу</mat-label>
-                    <mat-select [(value)]="checkedFilterOption">
-                        @for (option of filterOptions; track option.value) {
-                        <mat-option [value]="option.value">{{option.alias}}</mat-option>
-                        }
-                    </mat-select>
-                </mat-form-field>
-                <div class="d--flex">
-                    <ul class="no--bullets tasks--list">
-                        @for (task of filteredTasks(); track task.id) {
-                        <app-to-do-list-item [propTask]="task" [propEditedId]="editedTaskId()"
-                            (propOnDelete)="doDeleteTask(task.id)" (propOnSave)="doChangeTaskTitle(task.id, $event)"
-                            (propOnToggleStatus)="doChangeTaskStatus(task.id, $event)"
-                            (dblclick)="setEditedId(task.id)">
-                        </app-to-do-list-item>
-                        } @empty {
-                        <li class="task--field">
-                            <p>Список пуст</p>
-                        </li>
-                        }
-                    </ul>
-                    <router-outlet></router-outlet>
-                </div>
-                <app-todo-create-item (propCreate)="doAddNewTask($event)"></app-todo-create-item>
-                }
-            </main>
-        </div>
-        <footer class="footer">
-            <p>Обучение c Otus</p>
-            <p>Автор домашнего задания Евгений Греков, г.Рыбинск</p>
-        </footer>
-    </div>
+<div class="d--flex">
+    <ul class="no--bullets tasks--list">
+        @for (task of tasks(); track task.id) {
+        <app-to-do-list-item [propTask]="task" [propEditedId]="editedTaskId()" (propOnDelete)="doDeleteTask(task.id)"
+            (propOnSave)="doChangeTaskTitle(task.id, $event)" (propOnChangeStatus)="doChangeTaskStatus(task.id, $event)"
+            (dblclick)="setEditedId(task.id)">
+        </app-to-do-list-item>
+        } @empty {
+        <li class="task--field">
+            <p>Список пуст</p>
+        </li>
+        }
+    </ul>
+    <router-outlet></router-outlet>
 </div>
+<app-todo-create-item (propCreate)="doAddNewTask($event)"></app-todo-create-item>

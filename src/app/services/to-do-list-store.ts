@@ -47,7 +47,7 @@ export class ToDoListStore {
   }
 
   public doAddNewTask(task: Partial<Task>): void {
-    const taskOverall = { ...task, id: this.getIdNextAfterMax(), status: TaskStatus.IN_PROGRESS } as Task
+    const taskOverall = { ...task, id: this.getIdNextAfterMax(), status: TaskStatus.SCHEDULED } as Task
     this.protocol.addTask(taskOverall)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
