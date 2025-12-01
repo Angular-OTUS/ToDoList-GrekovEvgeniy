@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from "@angular/router";
@@ -17,13 +17,10 @@ export class MainLayout implements OnInit {
   private readonly store = inject(ToDoListStore)
 
   protected readonly descLinks: Description[] = descMainLayoutLinks;
-  protected readonly isLoading: WritableSignal<boolean> = signal(true)
+  protected readonly isLoading = this.store.getIsLosding
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.store.loadTasks()
-      this.isLoading.set(false)
-    }, 500)
+    this.store.loadTasks()
   }
   
 }

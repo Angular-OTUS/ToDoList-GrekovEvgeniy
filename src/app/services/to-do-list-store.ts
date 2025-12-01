@@ -2,7 +2,6 @@ import { DestroyRef, inject, Injectable, signal, Signal, WritableSignal } from '
 import { Task, TaskStatus } from '../interfaces/interfaces';
 import { ProtocolService } from './protocol-service';
 import { ToastService } from './toast-service';
-import { Subject, takeUntil } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -15,15 +14,21 @@ export class ToDoListStore {
 
   private readonly tasks: WritableSignal<Task[]> = signal([])
   public readonly getTasks: Signal<Task[]> = this.tasks.asReadonly()
+
   public readonly isEdited: WritableSignal<number | null> = signal(null, { equal: () => false })
 
+  private readonly isLoading: WritableSignal<boolean> = signal(true)
+  public readonly getIsLosding: Signal<boolean> = this.isLoading.asReadonly()
+
   public loadTasks(): void {
+    this.isLoading.set(true)
     this.protocol.getTasks()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (value) => {
           this.toast.show("Список задач обновлен")
           this.tasks.set(value)
+          this.isLoading.set(false)
         },
         error: () => {
           this.toast.show("Ошибка получения списка задач")

@@ -19,22 +19,16 @@
       "status": "completed"
     },
     {
-      "title": "Позагарать",
-      "description": "Это будет классно!!!",
-      "id": 12,
-      "status": "scheduled"
-    },
-    {
       "title": "Взять задачу у начальника",
       "description": "Спросить, что делать дальше по работе",
       "id": 13,
-      "status": "scheduled"
+      "status": "completed"
     },
     {
       "title": "Выложить ДЗ№8 на проверку",
       "description": "Пуш и все тут!",
       "id": 14,
-      "status": "inProgress"
+      "status": "completed"
     },
     {
       "title": "Уточнить насчет ДЗ№9",

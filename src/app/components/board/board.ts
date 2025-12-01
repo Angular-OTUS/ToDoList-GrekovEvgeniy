@@ -2,7 +2,7 @@ import { Component, computed, inject, Signal } from '@angular/core';
 import { SortedTasksByStatus, Task, TaskStatus } from '../../interfaces/interfaces';
 import { ToDoListStore } from '../../services/to-do-list-store';
 import { descTaskStatus } from '../../constants/description';
-import { ToDoListItem } from '../to-do-list-item/to-do-list-item';
+
 
 @Component({
   selector: 'app-board',
