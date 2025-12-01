@@ -7,7 +7,8 @@ import { Toast } from '../interfaces/interfaces';
 export class ToastService {
   private readonly DURATION = 4000
   private readonly toasts: WritableSignal<Toast[]> = signal([])
-  public getToasts = this.toasts.asReadonly()
+  public readonly getToasts = this.toasts.asReadonly()
+  
   private idToastForMethodShow = 0
 
   public show(message: string, duration: number = this.DURATION): void {

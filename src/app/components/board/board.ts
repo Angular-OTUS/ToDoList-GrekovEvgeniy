@@ -1,5 +1,5 @@
-import { Component, computed, inject, Signal } from '@angular/core';
-import { SortedTasksByStatus, Task, TaskStatus } from '../../interfaces/interfaces';
+import { ChangeDetectionStrategy, Component, computed, inject, Signal } from '@angular/core';
+import { SortedTasksByStatus, TaskStatus } from '../../interfaces/interfaces';
 import { ToDoListStore } from '../../services/to-do-list-store';
 import { descTaskStatus } from '../../constants/description';
 
@@ -9,11 +9,12 @@ import { descTaskStatus } from '../../constants/description';
   imports: [],
   templateUrl: './board.html',
   styleUrl: './board.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Board {
   private readonly store = inject(ToDoListStore)
-  protected headerStatus = descTaskStatus
-  protected orderColumnStatus = Object.values(TaskStatus)
+  protected readonly headerStatus = descTaskStatus
+  protected readonly orderColumnStatus = Object.values(TaskStatus)
   protected readonly sortedTasks: Signal<SortedTasksByStatus> = computed(() => this.getSortedTasks())
 
   private getSortedTasks(): SortedTasksByStatus {

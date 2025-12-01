@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit, signal, WritableSignal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
 import { RouterModule } from "@angular/router";
@@ -9,9 +9,11 @@ import { ToDoListStore } from '../../services/to-do-list-store';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterModule, MatTabsModule, MatButtonModule, RouterModule, LoadingSpinner],
+  imports: [RouterModule, MatTabsModule, MatButtonModule, LoadingSpinner],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  
 })
 export class MainLayout implements OnInit {
   private readonly store = inject(ToDoListStore)

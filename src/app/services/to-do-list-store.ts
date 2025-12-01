@@ -10,15 +10,15 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class ToDoListStore {
   private readonly protocol = inject(ProtocolService)
   private readonly toast = inject(ToastService)
-  private destroyRef = inject(DestroyRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   private readonly tasks: WritableSignal<Task[]> = signal([])
   public readonly getTasks: Signal<Task[]> = this.tasks.asReadonly()
 
-  public readonly isEdited: WritableSignal<number | null> = signal(null, { equal: () => false })
-
   private readonly isLoading: WritableSignal<boolean> = signal(true)
   public readonly getIsLosding: Signal<boolean> = this.isLoading.asReadonly()
+  
+  public readonly isEdited: WritableSignal<number | null> = signal(null, { equal: () => false })
 
   public loadTasks(): void {
     this.isLoading.set(true)

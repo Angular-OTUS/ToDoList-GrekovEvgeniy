@@ -1,6 +1,6 @@
 module.exports = (req, res, next) => {
     if (req.method === 'GET') {
-        const delay = 300;
+        const delay = 1000;
         return setTimeout(next, delay);
     }
     next();
