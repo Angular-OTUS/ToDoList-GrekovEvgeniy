@@ -9,6 +9,6 @@ import { ToastService } from '../../services/toast-service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ToastComponent {
-  private toastService = inject(ToastService)
-  public toasts = this.toastService.getToasts
+  private readonly toastService = inject(ToastService)
+  public readonly toasts = this.toastService.getToasts
 }

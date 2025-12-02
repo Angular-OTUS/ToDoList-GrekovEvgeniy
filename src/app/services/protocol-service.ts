@@ -7,8 +7,8 @@ import { Task } from '../interfaces/interfaces';
   providedIn: 'root'
 })
 export class ProtocolService {
-  private http = inject(HttpClient)
-  private url = "http://localhost:3000"
+  private readonly http = inject(HttpClient)
+  private readonly url = "http://localhost:3000"
 
   public getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${this.url}/tasks`)

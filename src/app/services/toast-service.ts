@@ -5,11 +5,13 @@ import { Toast } from '../interfaces/interfaces';
   providedIn: 'root'
 })
 export class ToastService {
+  private readonly DURATION = 4000
   private readonly toasts: WritableSignal<Toast[]> = signal([])
-  public getToasts = this.toasts.asReadonly()
+  public readonly getToasts = this.toasts.asReadonly()
+  
   private idToastForMethodShow = 0
 
-  public show(message: string, duration: number = 8000): void {
+  public show(message: string, duration: number = this.DURATION): void {
     const id = this.idToastForMethodShow
     this.toasts.update(v => [...v, {id, message}])
     setTimeout(() => this.remove(id),  duration)

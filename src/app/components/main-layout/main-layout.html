@@ -1,0 +1,23 @@
+<div class="to--do--list--container">
+  <div class="to--do--list--content">
+    <div class="content--card">
+      <nav mat-tab-nav-bar class="tab-nab" [tabPanel]="tabPanel">
+        @for (descLink of descLinks; track descLink) {
+        <a mat-tab-link [routerLink]="descLink.value" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+          <h2>{{descLink.alias}}</h2>
+        </a>
+        }
+      </nav>
+      <mat-tab-nav-panel #tabPanel>
+        @if(isLoading()) {
+        <app-loading-spinner></app-loading-spinner>
+        }
+        <router-outlet></router-outlet>
+      </mat-tab-nav-panel>
+    </div>
+    <footer class="footer">
+      <p>Обучение c Otus</p>
+      <p>Автор домашнего задания Евгений Греков, г.Рыбинск</p>
+    </footer>
+  </div>
+</div>

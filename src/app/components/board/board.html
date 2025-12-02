@@ -1,0 +1,10 @@
+<div class="columns">
+@for (status of orderColumnStatus; track status) {
+    <div class="column">
+    <h3>{{headerStatus.get(status)}}</h3>
+    @for (task of sortedTasks()[status]; track task) {
+    <p class="task">{{task.title}}</p>
+    }
+    </div>
+}
+</div>

@@ -2,7 +2,6 @@ import { DestroyRef, inject, Injectable, signal, Signal, WritableSignal } from '
 import { Task, TaskStatus } from '../interfaces/interfaces';
 import { ProtocolService } from './protocol-service';
 import { ToastService } from './toast-service';
-import { Subject, takeUntil } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
@@ -11,19 +10,25 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class ToDoListStore {
   private readonly protocol = inject(ProtocolService)
   private readonly toast = inject(ToastService)
-  private destroyRef = inject(DestroyRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   private readonly tasks: WritableSignal<Task[]> = signal([])
   public readonly getTasks: Signal<Task[]> = this.tasks.asReadonly()
+
+  private readonly isLoading: WritableSignal<boolean> = signal(true)
+  public readonly getIsLosding: Signal<boolean> = this.isLoading.asReadonly()
+  
   public readonly isEdited: WritableSignal<number | null> = signal(null, { equal: () => false })
 
   public loadTasks(): void {
+    this.isLoading.set(true)
     this.protocol.getTasks()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (value) => {
           this.toast.show("Список задач обновлен")
           this.tasks.set(value)
+          this.isLoading.set(false)
         },
         error: () => {
           this.toast.show("Ошибка получения списка задач")
@@ -47,7 +52,7 @@ export class ToDoListStore {
   }
 
   public doAddNewTask(task: Partial<Task>): void {
-    const taskOverall = { ...task, id: this.getIdNextAfterMax(), status: TaskStatus.IN_PROGRESS } as Task
+    const taskOverall = { ...task, id: this.getIdNextAfterMax(), status: TaskStatus.SCHEDULED } as Task
     this.protocol.addTask(taskOverall)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({

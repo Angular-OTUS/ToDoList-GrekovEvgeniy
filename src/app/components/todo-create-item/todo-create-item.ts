@@ -3,10 +3,11 @@ import { MatInputModule } from "@angular/material/input";
 import { Button } from "../button/button";
 import { FormsModule } from '@angular/forms';
 import { Task } from '../../interfaces/interfaces';
+import { Tooltip } from '../../directives/tooltip';
 
 @Component({
   selector: 'app-todo-create-item',
-  imports: [MatInputModule, Button, FormsModule],
+  imports: [MatInputModule, Button, FormsModule, Tooltip],
   templateUrl: './todo-create-item.html',
   styleUrl: './todo-create-item.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
